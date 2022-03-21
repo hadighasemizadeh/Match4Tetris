@@ -1,10 +1,10 @@
 # Match4Tetris
 
-# Game Architecture:
+# Game Architecture
 	•	MVC
-# Matching Algorithm: 
+# Matching Algorithm
 	•	Breath-First search
-# Game solution:
+# Game solution
 	•	The game solution must be built by CMake
 	•	To build it for your Visual Studio Version:
 		o	Installing CMake and open it
@@ -16,7 +16,7 @@
 		o	Press Generate
 		o	Now you have the solution in the defined build folder
 		o	Open solution and right-click on match_three and set it as startup project	
-# Keys:
+# Keys
 	•	Left-key | A: Slides the falling pieces to the left
 	•	Down-key | S: Freefall
 	•	Right-key | D: Slides the falling pieces to the right
