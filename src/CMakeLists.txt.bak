@@ -1,0 +1,47 @@
+SET(EXECUTABLE_NAME match_three)
+
+# The source files to compile
+SET (SRCs main[0]pp)
+
+SET(SDL2_DIR "${PROJECT_SOURCE_DIR}/third-parties/SDL2")
+SET(SDL2_image_DIR "${PROJECT_SOURCE_DIR}/third-parties/SDL2_image")
+SET(SDL2_ttf_DIR "${PROJECT_SOURCE_DIR}/third-parties/SDL2_ttf")
+
+FIND_PACKAGE(SDL2       REQUIRED)
+FIND_PACKAGE(SDL2_ttf   REQUIRED)
+FIND_PACKAGE(SDL2_image REQUIRED)
+
+# Add include directories
+INCLUDE_DIRECTORIES(utils/include)
+INCLUDE_DIRECTORIES(model/include)
+INCLUDE_DIRECTORIES(view/include)
+INCLUDE_DIRECTORIES(controller/include)
+
+INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${SDL2_image_DIR}/include)
+INCLUDE_DIRECTORIES(${SDL_TTF_INCLUDE_DIRS})
+
+# Add additional src subdirectories
+ADD_SUBDIRECTORY(utils)
+ADD_SUBDIRECTORY(model)
+ADD_SUBDIRECTORY(view)
+ADD_SUBDIRECTORY(controller)
+
+# Program executable
+ADD_EXECUTABLE(${EXECUTABLE_NAME}  ${SRCs})
+
+SET(PROJECT_LIBRARIES model view controller utils)
+
+TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME}    ${SDL2_LIBRARIES}
+                                            ${SDL2_IMAGE_LIBRARIES}
+                                            ${SDL_TTF_LIBRARIES}
+                                            ${PROJECT_LIBRARIES}
+                                            ${PROJECT_LIBRARIES})
+# Copy dlls
+FILE(COPY ${SDL2_LIBRARIES_DIR}/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR}/src)
+FILE(COPY ${SDL2_TTF_LIBRARIES_DIR}/SDL2_ttf.dll    ${SDL2_TTF_LIBRARIES_DIR}/libfreetype-6.dll  DESTINATION ${CMAKE_BINARY_DIR}/src)
+FILE(GLOB MY_PUBLIC_HEADERS "${SDL2_IMAGE_LIBRARIES_DIR}/*.dll")
+FILE(COPY ${MY_PUBLIC_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/src)
+
+# Copy resource folder into the binary folder
+FILE(COPY ${CMAKE_CURRENT_SOURCE_DIR}/res DESTINATION ${CMAKE_BINARY_DIR}/src)
