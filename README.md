@@ -21,3 +21,8 @@
 	•	Down-key | S: Freefall
 	•	Right-key | D: Slides the falling pieces to the right
 	•	Space-key: Flips the falling pieces 90-degree clock-wise
+# TODO:
+	•	Remove game logic bug
+	•	Sequential match does not work
+	•	Move all game logic to GameLogic script
+
